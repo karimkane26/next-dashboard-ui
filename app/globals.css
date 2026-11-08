@@ -4,7 +4,15 @@
   --background: #ffffff;
   --foreground: #171717;
 }
-
+/* personalisation des couleurs */
+@theme {
+  --color-lamaSky: #C3EBFA;
+  --color-lamaSkyLight: #EDF9FD;
+  --color-lamaPurple: #CFCEFF;
+  --color-lamaPurpleLight: #F1F0FF;
+  --color-LamaYellow: #FAE27C;
+  --color-LamaYellowLight: #FEFCE8;
+}
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
