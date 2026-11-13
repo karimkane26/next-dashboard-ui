@@ -3,10 +3,14 @@ import React from 'react'
 import Image from 'next/image'
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, createHorizontalChart } from 'recharts';
 import { generateMockData, MockDataType, RechartsDevtools } from '@recharts/devtools';
-
+type Financedata = {
+  name: string,
+  income: number,
+  expense: 2400
+}
 // const data: Array<MockDataType> = generateMockData(6, 26213);
 
-const Typed = createHorizontalChart<MockDataType, string, number>()({ XAxis, YAxis, Tooltip, Line });
+const Typed = createHorizontalChart<Financedata, string, number>()({ XAxis, YAxis, Tooltip, Line });
 const data = [
   {
     name: "Jan",
@@ -89,14 +93,33 @@ const FinanceChart = () => {
         bottom: 5,
       }}
     >
-      <CartesianGrid />
-      <Typed.XAxis dataKey="label" />
-      <Typed.YAxis width="auto" />
+      <CartesianGrid  strokeDasharray="3 3"/>
+      <Typed.XAxis 
+      dataKey="name"
+      tick={{fill: '#d1d5db'}}
+      tickLine={false}
+      tickMargin={20}
+      />
+      <Typed.YAxis width="auto" tick={{fill: "#d1d5db"}} tickLine={false}/>
       <Tooltip />
-      <Legend />
-      <Typed.Line dataKey="x" />
-      <Typed.Line dataKey="y" />
-      <RechartsDevtools />
+      <Legend
+      align='left'
+      verticalAlign='top'
+      wrapperStyle={{paddingTop: '10px',paddingBottom: '30px'}}
+      />
+     <Typed.Line
+  type="monotone"
+  dataKey="income"
+  stroke="#C3EBFA"
+  strokeWidth={5}
+  activeDot={{ r: 8 }}
+/>
+<Typed.Line
+  type="monotone"
+  dataKey="expense"
+  stroke="#CFCEFF"
+  strokeWidth={5}
+/>
     </Typed.LineChart>
         </div>
   )
