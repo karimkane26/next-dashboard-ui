@@ -2,6 +2,7 @@ import React from 'react'
 import UserCard from '@/app/components/UserCard'
 import CountChart from '@/app/components/CountChart'
 import AttendanceChart from '@/app/components/AttendanceChart'
+import FinanceChart from '@/app/components/FinanceChart'
 const Adminpage = () => {
   return (
     <div className="p-4 flex gap-4 flex-col md:flex-row">
@@ -24,8 +25,8 @@ const Adminpage = () => {
         </div>
       </div>
       {/* BOTTOM CHART */}
-        
-
+        <div className="w-full h-[500px]"></div>
+  <FinanceChart />
         
       </div>
       {/* RIGHT SIDEBAR */}
