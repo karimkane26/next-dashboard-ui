@@ -12,7 +12,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       <div className="w-[14%] md:w-[8%] xl:w-[14%]">
         <Link href="/" className="flex items-center gap-2 lg:justify-start">
           <Image alt="logo" src="/logo.png" width={32} height={32} />
-          <span className="hidden lg:block">Daroul Tanzil</span>
+          <span className="hidden lg:block font-bold">Daroul Tanzil</span>
         </Link>
         <Menu />
       </div>

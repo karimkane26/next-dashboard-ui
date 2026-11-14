@@ -38,3 +38,14 @@ body {
   border: none;
   font-family: "Inter, sans-serif";
 }
+.react-calendar__navigation__label__labelText{
+  font-weight: 600;
+}
+
+.react-calendar__tile--active
+ {
+    color: #fff;
+    background-color: #C3EBFA !important;
+    
+}
+
