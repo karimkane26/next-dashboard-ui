@@ -1,5 +1,15 @@
-import Image from 'next/image';
-const menuItems = [
+import Image from "next/image";
+import Link from "next/link";
+import { role } from "@/lib/data";
+
+type MenuItem = {
+  icon: string;
+  label: string;
+  href: string;
+  visible: string[];
+};
+
+const menuItems: { title: string; items: MenuItem[] }[] = [
   {
     title: "MENU",
     items: [
@@ -114,27 +124,32 @@ const menuItems = [
   },
 ];
 
-
-
-import Link from 'next/link';
-import { title } from 'process';
-import React from 'react'
-
 const Menu = () => {
   return (
-    <div className="flex flex-col justify-between full py-6">
-        {menuItems.map(i=>(
-            <div className="mb-4 flex flex-col gap-2" key={i.title}>
-                <span className="text-xs font-bold text-gray-500 uppercase hidden lg:block">{i.title}</span>
-                {i.items.map(item=> (
-                    <Link href={item.href} key={item.label} className="flex items-center lg:justify-start gap-4 px-4 py-2 text-gray-500" >
-                    <Image alt='' src={item.icon} width={20} height={20} /> <span className="hidden lg:block">{item.label}</span>
-                    </Link>
-                ))}
-            </div>
-        ))}
+    <div className="flex flex-col justify-between h-full py-6">
+      {menuItems.map((i) => (
+        <div className="mb-4 flex flex-col gap-2" key={i.title}>
+          <span className="text-xs font-bold text-gray-500 uppercase hidden lg:block">
+            {i.title}
+          </span>
+          {i.items.map((items) => {
+            if (items.visible.includes(role)) {
+              return (
+                <Link
+                  href={items.href}
+                  key={items.label}
+                  className="flex items-center justify-center lg:justify-start gap-4 md:px-2 text-gray-500 py-2 rounded-md hover:bg-lamaSky"
+                >
+                  <Image src={items.icon} alt="" width={20} height={20} />
+                  <span className="hidden lg:block">{items.label}</span>
+                </Link>
+              );
+            }
+          })}
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
