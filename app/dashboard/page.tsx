@@ -1,9 +1,8 @@
-import React from 'react'
+import { redirect } from "next/navigation";
+import { role } from "@/lib/data";
 
-const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
+// "/dashboard" : on envoie l'utilisateur vers SA page d'accueil selon son rôle
+// ex. role = "teacher" → "/dashboard/teacher"
+export default function Dashboard() {
+  redirect(`/dashboard/${role}`);
 }
-
-export default Dashboard

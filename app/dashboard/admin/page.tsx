@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import UserCard from '@/app/components/UserCard'
 import CountChart from '@/app/components/CountChart'
 import AttendanceChart from '@/app/components/AttendanceChart'
@@ -11,7 +11,7 @@ const Adminpage = () => {
       {/* LEFT SIDEBAR */}
       <div className="w-full lg:w-2/3 flex flex-col gap-8">
       <div className="flex gap-4 justify-between flex-wrap">
-      <UserCard type="students"/>
+      <UserCard type="student"/>
       <UserCard type="teacher"/>
       <UserCard type="parent"/>
       <UserCard type="staff"/>
@@ -27,13 +27,18 @@ const Adminpage = () => {
         </div>
       </div>
       {/* BOTTOM CHART */}
-        <div className="w-full h-[500px]"></div>
-  <FinanceChart />
+        {/* Le graphique doit être DANS la div qui a une hauteur */}
+        <div className="w-full h-[500px]">
+          <FinanceChart />
+        </div>
       </div>
       {/* RIGHT SIDEBAR */}
       
       <div className="w-full lg:w-1/3 flex flex-col gap-8">
-      <EventCalendar />
+      {/* Suspense : le calendrier lit la date du jour, il est donc affiché au moment de la visite */}
+      <Suspense fallback={<div className="bg-white p-4 rounded-md">Loading...</div>}>
+        <EventCalendar />
+      </Suspense>
       <Announcements />
       </div>
     </div>

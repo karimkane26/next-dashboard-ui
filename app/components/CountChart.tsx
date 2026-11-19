@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
 import { RadialBarChart, RadialBar, Legend, Tooltip } from 'recharts';
-import { RechartsDevtools } from '@recharts/devtools';
 import Image from 'next/image';
 const data = [
      {
@@ -45,7 +44,6 @@ const data = [
 //       <RadialBar label={{ position: 'insideStart', fill: '#fff' }} background dataKey="count" />
 //       {/* <Legend iconSize={10} position="right" /> */}
 //       <Tooltip />
-//       <RechartsDevtools />
 
 //     </RadialBarChart>
 //     <Image src="/maleFemale.png" alt="User" width={20} height={20} className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'/>
@@ -62,7 +60,7 @@ const data = [
 //           </div>
 
 //           <div className="flex flex-col gap-1">
-//             <div className="w-5 h-5 bg-LamaYellow rounded-full" />
+//             <div className="w-5 h-5 bg-lamaYellow rounded-full" />
 //             <h1 className="font-bold">1,234</h1>
 //             <h2 className="text-xs text-gray-300">Girl (45%)</h2>
 //           </div>
@@ -96,7 +94,6 @@ const CountChart = () => {
         >
           <RadialBar background dataKey="count" />
           <Tooltip />
-          <RechartsDevtools />
         </RadialBarChart>
 
         <Image

@@ -1,9 +1,7 @@
 "use client"
 import React from 'react'
-import { generateMockData, RechartsDevtools } from '@recharts/devtools';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend ,Rectangle} from 'recharts';
 import Image from 'next/image';
-// const data = generateMockData(6,823)
 import { ResponsiveContainer } from 'recharts';
 const data = [
   {
@@ -66,7 +64,6 @@ const AttendanceChart = () => {
       radius={[10,10,0,0]}
 
       />
-      <RechartsDevtools />
     </BarChart>
     </ResponsiveContainer>
 

@@ -10,8 +10,8 @@
   --color-lamaSkyLight: #EDF9FD;
   --color-lamaPurple: #CFCEFF;
   --color-lamaPurpleLight: #F1F0FF;
-  --color-LamaYellow: #FAE27C;
-  --color-LamaYellowLight: #FEFCE8;
+  --color-lamaYellow: #FAE27C;
+  --color-lamaYellowLight: #FEFCE8;
 }
 @theme inline {
   --color-background: var(--background);

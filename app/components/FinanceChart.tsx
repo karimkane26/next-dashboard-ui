@@ -2,13 +2,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, createHorizontalChart } from 'recharts';
-import { generateMockData, MockDataType, RechartsDevtools } from '@recharts/devtools';
 type Financedata = {
   name: string,
   income: number,
-  expense: 2400
+  expense: number
 }
-// const data: Array<MockDataType> = generateMockData(6, 26213);
 
 const Typed = createHorizontalChart<Financedata, string, number>()({ XAxis, YAxis, Tooltip, Line });
 const data = [

@@ -1,7 +1,7 @@
 import Announcements from '@/app/components/Announcements'
 import BigCalendar from '@/app/components/BigCalendar'
 import EventCalendar from '@/app/components/EventCalendar'
-import React from 'react'
+import React, { Suspense } from 'react'
 
 const StudentPage = () => {
   return (
@@ -15,7 +15,10 @@ const StudentPage = () => {
       </div>
       {/* RIGHT */}
       <div className="w-full xl:w-1/3 flex flex-col gap-8">
-      <EventCalendar />
+      {/* Suspense : le calendrier lit la date du jour, il est donc affiché au moment de la visite */}
+      <Suspense fallback={<div className="bg-white p-4 rounded-md">Loading...</div>}>
+        <EventCalendar />
+      </Suspense>
       <Announcements />
       </div>
     </div>

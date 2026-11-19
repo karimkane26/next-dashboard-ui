@@ -1,9 +1,10 @@
+import FormModal from "@/app/components/FormModal";
 import Pagination from "@/app/components/Pagination";
 import Table from "@/app/components/Table";
 import TableSearch from "@/app/components/TableSearch";
-import { parentsData,subjectsData ,role } from "@/lib/data";
+import { role, subjectsData } from "@/lib/data";
 import Image from "next/image";
-import Link from "next/link";
+
 type Subject = {
   id: number;
   name: string;
@@ -38,10 +39,8 @@ const SubjectListPage = () => {
         <div className="flex items-center gap-2">
           {role === "admin" && (
             <>
-              {/* <FormModal table="subject" type="update" data={item} />
-              <FormModal table="subject" type="delete" id={item.id} /> */}
-              <button>modifier</button>
-              <button>supprimer</button>
+              <FormModal table="subject" type="update" data={item} />
+              <FormModal table="subject" type="delete" id={item.id} />
             </>
           )}
         </div>
@@ -57,16 +56,13 @@ const SubjectListPage = () => {
         <div className="flex flex-col md:flex-row items-center gap-4 w-full md:w-auto">
           <TableSearch />
           <div className="flex items-center gap-4 self-end">
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-LamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/filter.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-LamaYellow">
+            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-lamaYellow">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-full bg-LamaYellow">
-              <Image src="/plus.png" alt="" width={14} height={14} />
-            </button>
-            {/* {role === "admin" && <FormModal table="teacher" type="create" />} */}
+            {role === "admin" && <FormModal table="subject" type="create" />}
           </div>
         </div>
       </div>
