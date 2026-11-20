@@ -3,26 +3,28 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 // Chargement des polices Google
-const geistSans = Geist({
+const policeSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const policeMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
+// Le titre de l'onglet du navigateur
 export const metadata: Metadata = {
-  title: "Daroul Tanzil — Dashboard",
+  title: "Daroul Tanzil — Tableau de bord",
   description: "Tableau de bord de gestion scolaire",
 };
 
-// Layout racine : le SEUL endroit du projet avec <html> et <body>
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Mise en page RACINE : le SEUL endroit du projet avec <html> et <body>
+// (le nom du fichier, layout.tsx, est imposé par Next.js)
+export default function MiseEnPageRacine({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr">
-      <body className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className={`${policeSans.variable} ${policeMono.variable} h-full antialiased`}>
         {children}
       </body>
     </html>

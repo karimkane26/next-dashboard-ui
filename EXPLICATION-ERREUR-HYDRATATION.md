@@ -6,7 +6,7 @@
 In HTML, <div> cannot be a child of <html>.
 This will cause a hydration error.
 
-at DashboardLayout (app\dashboard\layout.tsx:29:7)
+at MiseEnPageTableauDeBord (app\tableau-de-bord\layout.tsx:29:7)
 ```
 
 En français : **« En HTML, un `<div>` ne peut pas être enfant direct de `<html>`. Cela va provoquer une erreur d'hydratation. »**
@@ -58,7 +58,7 @@ Le problème :
 C'est le **layout racine** : il s'applique à **toutes** les pages du site.
 C'est le **seul** fichier qui doit contenir `<html>` et `<body>`.
 
-### Problème 2 : `app/dashboard/layout.tsx` contient un `<html>` en trop
+### Problème 2 : `app/tableau-de-bord/layout.tsx` contient un `<html>` en trop
 
 ```tsx
 // ❌ AVANT
@@ -73,11 +73,11 @@ Dans Next.js, les layouts **s'emboîtent** les uns dans les autres, comme des po
 
 ```
 app/layout.tsx                  → <html><body> ... </body></html>
-  └─ app/dashboard/layout.tsx   → s'affiche DANS le <body> du layout racine
-       └─ app/dashboard/page.tsx → s'affiche DANS le layout du dashboard
+  └─ app/tableau-de-bord/layout.tsx   → s'affiche DANS le <body> du layout racine
+       └─ app/tableau-de-bord/page.tsx → s'affiche DANS le layout du tableau de bord
 ```
 
-Le layout du dashboard est **déjà** placé dans le `<body>` du layout racine.
+Le layout du tableau de bord est **déjà** placé dans le `<body>` du layout racine.
 S'il ouvre un nouveau `<html>`, on obtient un `<html>` dans un `<html>`, et ce n'est pas valide.
 
 👉 Un layout enfant doit renvoyer **un simple `<div>`**, jamais `<html>` ni `<body>`.
@@ -96,12 +96,12 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
 // Chargement des polices Google
-const geistSans = Geist({
+const policeSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
+const policeMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
@@ -112,10 +112,10 @@ export const metadata: Metadata = {
 };
 
 // ✅ Le SEUL endroit du projet avec <html> et <body>
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default function MiseEnPageRacine({ children }: LayoutProps<"/">) {
   return (
     <html lang="fr">
-      <body className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className={`${policeSans.variable} ${policeMono.variable} h-full antialiased`}>
         {children}
       </body>
     </html>
@@ -123,23 +123,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
 }
 ```
 
-### `app/dashboard/layout.tsx` (layout du dashboard)
+### `app/tableau-de-bord/layout.tsx` (layout du tableau de bord)
 
 On enlève `<html>` et on renvoie directement le `<div>` :
 
 ```tsx
 import Image from "next/image";
 import Link from "next/link";
-import Menu from "@/app/components/Menu";
-import Navbar from "@/app/components/Navbar";
+import Menu from "@/app/composants/Menu";
+import BarreNavigation from "@/app/composants/BarreNavigation";
 
 // ✅ Un layout enfant renvoie un simple <div>
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function MiseEnPageTableauDeBord({ children }: { children: React.ReactNode }) {
   return (
     <div className="h-screen flex">
       {/* Partie gauche : logo + menu */}
       <div className="w-[14%] md:w-[8%] xl:w-[14%]">
-        <Link href="/" className="flex items-center gap-2 lg:justify-start">
+        <Link href="/tableau-de-bord" className="flex items-center gap-2 lg:justify-start">
           <Image alt="logo" src="/logo.png" width={32} height={32} />
           <span className="hidden lg:block">Daroul Tanzil</span>
         </Link>
@@ -148,7 +148,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
       {/* Partie droite : barre de navigation + contenu de la page */}
       <div className="w-[86%] md:w-[92%] lg:w-[84%] xl:w-[86%] bg-[#F7F8FA] overflow-scroll">
-        <Navbar />
+        <BarreNavigation />
         {children}
       </div>
     </div>
@@ -156,19 +156,19 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 }
 ```
 
-### Ce qu'on a aussi retiré du layout du dashboard
+### Ce qu'on a aussi retiré du layout du tableau de bord
 
 | Élément retiré | Pourquoi |
 |---|---|
 | `import "@/app/globals.css"` | Le layout racine le charge déjà pour tout le site |
 | Les deux `Montserrat(...)` | Les polices se déclarent dans le layout racine. Pour utiliser Montserrat partout, remplace `Geist` par `Montserrat` dans `app/layout.tsx` |
-| `export const metadata` (optionnel) | À garder seulement si tu veux un titre d'onglet différent pour le dashboard |
+| `export const metadata` (optionnel) | À garder seulement si tu veux un titre d'onglet différent pour le tableau de bord |
 
 ---
 
 ## 6. À retenir
 
 - ✅ **Un seul `<html>` et un seul `<body>`** dans tout le projet, uniquement dans `app/layout.tsx`.
-- ✅ Tous les autres layouts (`app/dashboard/layout.tsx`, etc.) renvoient **un simple `<div>`**.
+- ✅ Tous les autres layouts (`app/tableau-de-bord/layout.tsx`, etc.) renvoient **un simple `<div>`**.
 - ✅ Les polices et le CSS global se chargent **une seule fois**, dans le layout racine.
 - ⚠️ Une « erreur d'hydratation » veut dire que le HTML du serveur et celui du navigateur ne correspondent pas. Commence par vérifier que ton HTML est **valide**.
